@@ -1,11 +1,11 @@
 const path = require("path");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./src/index.html",
+  template: "./client/index.html",
   filename: "./index.html",
 });
 module.exports = {
-  entry: path.join(__dirname, "src/index.js"),
+  entry: path.join(__dirname, "client/index.js"),
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "build.js",
