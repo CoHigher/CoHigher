@@ -1,9 +1,12 @@
 import React  from "react";
 import JobsContainer from "./container/JobsContainer";
+import photo from './assets/img-academy-oqxuxY.jpeg';
 
 const App = (props) => {
   props.store
-  return <div><JobsContainer jobs = {props.store.jobs}/></div>;
+  return <div>
+    <img src={photo}/>
+  </div>;
 };
 
 export default App;
