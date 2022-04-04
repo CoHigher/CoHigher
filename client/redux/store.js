@@ -5,7 +5,7 @@ import { userReducer } from "./userReducer";
 
 const reducers = combineReducers({
   user: userReducer,
-  job: jobReducer,
+  jobs: jobReducer,
 });
 
 export const store = createStore(reducers, applyMiddleware(thunk));

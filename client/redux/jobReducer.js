@@ -10,7 +10,7 @@ export const addJobAction = (data) => ({ type: ADD_JOB, data: data });
 export const updateJobAction = (data) => ({ type: UPDATE_JOB, data: data });
 export const deleteJobAction = (data) => ({ type: DELETE_JOB, data: data });
 
-export const getJobThunk = (userId) => {
+export const getJobsThunk = (userId) => {
   return (dispatch) => {
     axios
       .post(`/getJobs/${userId}`)
