@@ -30,18 +30,33 @@ app.get("/index", (req, res) => {
   res.send("Invalid Endpoint");
 });
 
-//Routes/DB test route
+// cookie test route
 app.get("/test", userJobsController.signup, (req, res) => {
   res.status(200).cookie('user1','verified').send(res.locals)
 });
 
-// second test route to check if userJobs is working
+// get individual user jobs
 app.get("/test2", userJobsController.getUserJobs, (req, res) => {
   res.status(200).send(res.locals)
 });
 
-// thir test to check if we can get the cohort's jobs
+// get cohort user jobs
 app.get("/test3", userJobsController.getCohortJobs, (req, res) => {
+  res.status(200).send(res.locals)
+});
+
+// post jobs
+app.post("/test4", userJobsController.postUserJob, (req, res) => {
+  res.status(200).send(res.locals)
+});
+
+// update jobs 
+app.put("/test5", userJobsController.updateUserJob, (req, res) => {
+  res.status(200).send(res.locals)
+});
+
+// delete jobs
+app.delete("/test6", userJobsController.deleteUserJob, (req, res) => {
   res.status(200).send(res.locals)
 });
 
