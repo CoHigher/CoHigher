@@ -57,88 +57,94 @@ export const deleteJobThunk = (jobId) => {
 const initialState = {
   jobs: [
     {
-      jobDescription: "software engineer",
-      salary: "135,000-150,000",
-      companyName: "Microsoft",
+      id: 1,
+      jobdescription: "software engineer",
+      salaryrange: "135,000-150,000",
+      company: "Microsoft",
       location: "NY",
-      status: "wishlist",
+      jobstatus: "wishlist",
     },
     {
-      jobDescription: " senior software engineer",
-      salary: "135,000-150,000",
-      companyName: "Apple",
+      id: 2,
+      jobdescription: " senior software engineer",
+      salaryrange: "135,000-150,000",
+      company: "Apple",
       location: "NY",
-      status: "applied",
+      jobstatus: "applied",
     },
     {
-      jobDescription: "front-end engineer",
-      salary: "135,000-150,000",
-      companyName: "IBM",
+      id: 3,
+      jobdescription: "front-end engineer",
+      salaryrange: "135,000-150,000",
+      company: "IBM",
       location: "NY",
-      status: "recruitercall",
+      jobstatus: "recruitercall",
     },
     {
-      jobDescription: "back-end engineer",
-      salary: "135,000-150,000",
-      companyName: "Meta",
+      id: 4,
+      jobdescription: "back-end engineer",
+      salaryrange: "135,000-150,000",
+      company: "Meta",
       location: "NY",
-      status: "interview",
+      jobstatus: "interview",
     },
     {
-      jobDescription: "engineer",
-      salary: "135,000-150,000",
-      companyName: "Bloomsburg",
+      id: 5,
+      jobdescription: "engineer",
+      salaryrange: "135,000-150,000",
+      company: "Bloomsburg",
       location: "NY",
-      status: "offer",
+      jobstatus: "offer",
     },
     {
-      jobDescription: "engineer",
-      salary: "135,000-150,000",
-      companyName: "Capital One",
+      id: 6,
+      jobdescription: "engineer",
+      salaryrange: "135,000-150,000",
+      company: "Capital One",
       location: "NJ",
-      status: "wishlist",
+      jobstatus: "wishlist",
     },
     {
-      jobDescription: "engineer",
-      salary: "135,000-150,000",
-      companyName: "Netflix",
+      id: 7,
+      jobdescription: "engineer",
+      salaryrange: "135,000-150,000",
+      company: "Netflix",
       location: "NJ",
-      status: "applied",
+      jobstatus: "applied",
     },
     {
-      jobDescription: "software engineer",
-      salary: "135,000-150,000",
-      companyName: "Amazon",
+      id: 8,
+      jobdescription: "software engineer",
+      salaryrange: "135,000-150,000",
+      company: "Amazon",
       location: "NJ",
-      status: "recruitercall",
+      jobstatus: "recruitercall",
     },
     {
-      jobDescription: "software engineer",
-      salary: "135,000-150,000",
-      companyName: "Sony",
+      id: 9,
+      jobdescription: "software engineer",
+      salaryrange: "135,000-150,000",
+      company: "Sony",
       location: "NJ",
-      status: "interview",
+      jobstatus: "interview",
     },
     {
-      jobDescription: "back-end engineer",
-      salary: "135,000-150,000",
-      companyName: "Google",
+      id: 10,
+      jobdescription: "back-end engineer",
+      salaryrange: "135,000-150,000",
+      company: "Google",
       location: "NJ",
-      status: "offer",
+      jobstatus: "offer",
     },
     {
-      jobDescription: "front-end engineer",
-      salary: "135,000-150,000",
-      companyName: "Adobe",
+      id: 11,
+      jobdescription: "front-end engineer",
+      salaryrange: "135,000-150,000",
+      company: "Adobe",
       location: "TX",
-      status: "wishlist",
+      jobstatus: "wishlist",
     },
   ],
-  // jobDescription: "",
-  // companyName: "",
-  // salary: "",
-  // location: "",
-  // jobStatus: "",
 };
 
 export const jobReducer = (state = initialState, action) => {
@@ -150,14 +156,11 @@ export const jobReducer = (state = initialState, action) => {
       };
     }
     case ADD_JOB: {
+      console.log("In add job reducer");
+      console.log(action);
       return {
         ...state,
-        jobs: [...state.jobs, data],
-        // jobDescription: action.data.jobDescription,
-        // companyName: action.data.companyName,
-        // salary: action.data.salary,
-        // location: action.data.location,
-        // jobStatus: action.data.jobStatus,
+        jobs: [...state.jobs, action.data],
       };
     }
     case UPDATE_JOB: {
@@ -165,11 +168,11 @@ export const jobReducer = (state = initialState, action) => {
         ...state,
         jobs: state.jobs.map((job) => {
           if (job.id === action.data.id) {
-            job.jobDescription = action.data.jobDescription;
-            job.companyName = action.data.companyName;
-            job.salary = action.data.salary;
+            job.jobdescription = action.data.jobdescription;
+            job.company = action.data.company;
+            job.salaryrange = action.data.salaryrange;
             job.location = action.data.location;
-            job.jobStatus = action.data.jobStatus;
+            job.jobstatus = action.data.jobstatus;
           }
           return job;
         }),

@@ -1,14 +1,17 @@
 import React from "react";
 
 const JobCard = (props) =>{
-  const {jobDescription,salary, companyName, location, status} = props.info;
+  const {jobdescription,salaryrange, company, location, jobstatus} = props.info;
+  const checkClick = ()=>{
+    props.onCardClickHandler(props.info);
+  }
   return(
-    <div style={{margin: "6px"}}>
-      <h3>{jobDescription}</h3>
-      <p>{salary}</p>
-      <p>{companyName}</p>
+    <div style={{margin: "6px"}} onClick={checkClick}>
+      <h3>{jobdescription}</h3>
+      <p>{salaryrange}</p>
+      <p>{company}</p>
       <p>{location}</p>
-      <p>{status}</p>
+      <p>{jobstatus}</p>
     </div>
   )
 };

@@ -2,9 +2,9 @@ import React from "react";
 import JobCard from "./JobCard";
 
 const Jobs = (props) =>{
-  const {name, jobs , addClickedHandler} = props;
+  const {name, jobs , addClickedHandler, onCardClickHandler} = props;
   const jobsCards = jobs.map((job,i)=>{
-    return <JobCard key={i} info = {job} />;
+    return <JobCard onCardClickHandler={onCardClickHandler} key={i} info = {job} />;
   });
   return(
     <div>
