@@ -40,6 +40,11 @@ app.get("/test2", userJobsController.getUserJobs, (req, res) => {
   res.status(200).send(res.locals)
 });
 
+// thir test to check if we can get the cohort's jobs
+app.get("/test3", userJobsController.getCohortJobs, (req, res) => {
+  res.status(200).send(res.locals)
+});
+
 //express error handler
 app.use((err, req, res, next) => {
   console.log(err);
@@ -55,4 +60,5 @@ app.listen(port, () => {
 module.exports = {
   app,
 };
+
 
