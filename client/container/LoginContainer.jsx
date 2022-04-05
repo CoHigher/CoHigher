@@ -19,15 +19,29 @@ const Login = () => {
                 <hr className="Break_Lines"></hr>
               </section>
               <h4>Email</h4>
-                <input className="Sigup_buttons" placeholder='mail@website.com'></input>
+                <input 
+                  className="Sigup_buttons" 
+                  placeholder='mail@website.com'
+                  value="" //insert prop
+                  onChange = {e => {loginChange(e.target.value, 'email')}} //update action
+                ></input>
                 <h4>Password</h4>
-                <input className="Sigup_buttons" placeholder='Min. 8 character'></input>
+                <input 
+                  className="Sigup_buttons" 
+                  placeholder='Min. 8 character'
+                  value="" //insert prop
+                  onChange = {e => {loginChange(e.target.value, 'password')}} //update action
+                ></input>
               <section className="Remember_Pass">
                 <h4><input className="Remember_Check" type="checkbox"/>Remember Me</h4>
-                <a href="#"><h4>Forget password</h4></a>
+                <a href="/passwordreset"><h4>Forget password</h4></a>
               </section>
-              <button className="Login_Button">Login</button>
-              <h4>Not registered yet? <a href="#">Create an Account</a></h4>
+              <button 
+                className="Login_Button"
+                type="submit"
+                onClick = {() => {processLogin(loginData.username, loginData.password)}}
+              >Login</button>
+              <h4>Not registered yet? <a href="/signup">Create an Account</a></h4>
           </div>
           <section className="Bottom_Title">© Cohigher 2022</section>
         </div>
