@@ -33,6 +33,9 @@ userJobsController.login = (req, res, next) => {
 };
 
 userJobsController.getUserJobs = (req, res, next) => {
+  // {
+  //   "userId":1
+  // }
   
   const {userId} = req.body
 
@@ -53,6 +56,9 @@ userJobsController.getUserJobs = (req, res, next) => {
 
 userJobsController.getCohortJobs = (req, res, next) => {
   
+  //   {
+  //   "cohortId":1
+  //   }
   const {cohortId} = req.body
 
   const sqlQuery = `SELECT * FROM USERS,JOBS WHERE cohortId=${cohortId} AND USERS.userid=jobs.userid`
@@ -71,6 +77,16 @@ userJobsController.getCohortJobs = (req, res, next) => {
 };
 
 userJobsController.postUserJob = (req, res, next) => {
+//   {
+//     "company": "Snapchat",
+//     "userId":  3,
+//     "location":   "Los Angeles",
+//     "jobdescription": "Senior Software Engineer",
+//     "salaryrange": "200,000-300,000",
+//     "jobstatus":  "phone interview",
+//     "interviewdate": "2022-05-15",
+//     "hiredstatus": false
+//  }
 
   const {company, userId, location, jobdescription, salaryrange, jobstatus, interviewdate, hiredstatus} = req.body
   // destructure req.body to get the values
@@ -95,6 +111,16 @@ userJobsController.postUserJob = (req, res, next) => {
 };
 
 userJobsController.updateUserJob = (req, res, next) => {
+//   {
+//     "id": 6,
+//    "company": "Instagram",
+//    "location":   "Los Angeles",
+//    "jobdescription": "Senior Software Engineer",
+//    "salaryrange": "200,000-300,000",
+//    "jobstatus":  "phone interview",
+//    "interviewdate": "2022-05-15",
+//    "hiredstatus": false
+// }
 
   // destructure req.body to get the values
   const {id, company, location, jobdescription, salaryrange, jobstatus, interviewdate, hiredstatus} = req.body
@@ -115,7 +141,10 @@ userJobsController.updateUserJob = (req, res, next) => {
 };
 
 userJobsController.deleteUserJob = (req, res, next) => {
-
+  
+//   {
+//     "id": 6
+// }
   // destructure req.body to get the values
    const {id} = req.body
   const sqlQuery = `DELETE FROM JOBS WHERE id = ${id}`
