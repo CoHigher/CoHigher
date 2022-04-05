@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import login_image from '../assets/login-image.jpg'
 import google_icon from '../assets/google-icon.png'
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="Login_page">
@@ -22,15 +25,13 @@ const Login = () => {
                 <input 
                   className="Sigup_buttons" 
                   placeholder='mail@website.com'
-                  value="" //insert prop
-                  onChange = {e => {loginChange(e.target.value, 'email')}} //update action
+                  onChange = {e => {setEmail(e.target.value)}}
                 ></input>
                 <h4>Password</h4>
                 <input 
                   className="Sigup_buttons" 
                   placeholder='Min. 8 character'
-                  value="" //insert prop
-                  onChange = {e => {loginChange(e.target.value, 'password')}} //update action
+                  onChange = {e => {setPassword(e.target.value)}}
                 ></input>
               <section className="Remember_Pass">
                 <h4><input className="Remember_Check" type="checkbox"/>Remember Me</h4>
@@ -39,7 +40,7 @@ const Login = () => {
               <button 
                 className="Login_Button"
                 type="submit"
-                onClick = {() => {processLogin(loginData.username, loginData.password)}}
+                onClick = {() => {loginUserThunk(loginData.username, loginData.password)}}
               >Login</button>
               <h4>Not registered yet? <a href="/signup">Create an Account</a></h4>
           </div>
