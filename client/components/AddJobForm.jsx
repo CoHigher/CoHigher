@@ -1,32 +1,36 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 
 const AddJobForm = (props) =>{
-  const [jobDescription, setJobDescription] = useState('');
-  const [salary, setSalary] = useState('');
-  const [companyName, setCompanyName] = useState('');
+  const [jobdescription, setjobdescription] = useState('');
+  const [salaryrange, setsalaryrange] = useState('');
+  const [company, setCompany] = useState('');
   const [location, setLocation] = useState('');
-  const [status, setStatus] = useState('');
-
+  const [jobstatus, setjobstatus] = useState('');
   const onBtnSubmit = ()=>{
-    console.log('jobDescription', jobDescription)
-    console.log('salary' , salary)
-    console.log('companyName', companyName)
-    console.log('location', location)
-    console.log('status',status)
+    const data = {jobdescription, salaryrange, company, location, jobstatus};
+    props.onSubmitJobHandler(data);
   }
+  
+  useEffect(()=>{
+    setjobdescription(props.info.jobdescription ||'');
+    setsalaryrange(props.info.salaryrange ||'');
+    setCompany(props.info.company ||'');
+    setLocation(props.info.location ||'');
+    setjobstatus(props.info.jobstatus ||'');
+  },[]);
 
   return(
     <div>
-     <lable for='jobDescription'>Job Description</lable>
-     <input id="jobDescription" onChange={setJobDescription(e.target.value)} />
-     <lable for='salary'>Salary</lable>
-     <input id="salary" onChange={setSalary(e.target.value)} />
-     <lable for='companyName'>Company Name</lable>
-     <input id="companyName" onChange={setCompanyName(e.target.value)} />
-     <lable for='location'>Location</lable>
-     <input id="location" onChange={setLocation(e.target.value)} />
-     <lable for='status'>Status</lable>
-     <input id="status" onChange={setStatus(e.target.value)} />
+     <label htmlFor='jobdescription'>Job Description</label>
+     <input id="jobdescription" onChange={(e)=>setjobdescription(e.target.value)} value={jobdescription}/>
+     <label htmlFor='salaryrange'>salaryrange</label>
+     <input id="salaryrange" onChange={(e)=>setsalaryrange(e.target.value)} value={salaryrange}/>
+     <label htmlFor='company'>Company Name</label>
+     <input id="company" onChange={(e)=>setCompany(e.target.value)}  value={company}/>
+     <label htmlFor='location'>Location</label>
+     <input id="location" onChange={(e)=>setLocation(e.target.value)} value={location}/>
+     <label htmlFor='jobstatus'>jobstatus</label>
+     <input id="jobstatus" onChange={(e)=>setjobstatus(e.target.value)} value={jobstatus}/>
      <button onClick={onBtnSubmit} type='button'>Submit</button>
     </div>
   )
