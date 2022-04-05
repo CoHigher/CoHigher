@@ -35,6 +35,10 @@ app.get("/test", userJobsController.signup, (req, res) => {
   res.status(200).cookie('user1','verified').send(res.locals)
 });
 
+// second test route to check if userJobs is working
+app.get("/test2", userJobsController.getUserJobs, (req, res) => {
+  res.status(200).send(res.locals)
+});
 
 //express error handler
 app.use((err, req, res, next) => {
