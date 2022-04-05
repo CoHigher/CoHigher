@@ -49,5 +49,24 @@ userJobsController.getUserJobs = (req, res, next) => {
 
 };
 
+userJobsController.getCohortJobs = (req, res, next) => {
+  let cohortId = 31;
+
+  const sqlQuery = `SELECT * FROM USERS,JOBS WHERE cohortId=${cohortId} AND USERS.userid=jobs.userid`
+
+  db.query(sqlQuery)
+    .then(payload => {
+      res.locals = payload.rows;
+      next();
+    }).catch(err=>{
+      return next({
+        log:'Error in userJobsController.getCohortJobs',
+        message: 'Cant get cohort jobs'
+      });
+    });
+
+};
+
+
 
 module.exports = userJobsController;
