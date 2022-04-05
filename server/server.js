@@ -5,6 +5,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 
+
+// controller
+const userJobsController = require("/Users/yasir/Desktop/CoHigher/server/controllers.js");
+
+
 // handle parsing request body
 
 app.use(express.json());
@@ -23,10 +28,13 @@ app.use(express.static(path.resolve(__dirname, "../client")));
 app.use(bodyParser.json());
 
 // Index Route
-app.get("/", (req, res) => {
+app.get("/index", (req, res) => {
   res.send("Invalid Endpoint");
 });
 
+app.get("/test", userJobsController.signup, (req, res) => {
+  res.status(200).send(res.locals)
+});
 // Use Routes
 
 //express error handler
