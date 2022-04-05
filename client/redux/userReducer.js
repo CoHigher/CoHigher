@@ -17,6 +17,17 @@ export const loginUserThunk = ({ email, password }) => {
   };
 };
 
+export const createUserThunk = (data) => {
+  return (dispatch) => {
+    axios
+      .post("/create", data)
+      .then((result) => {
+        dispatch(loginUserAction(result));
+      })
+      .catch((err) => console.log(err));
+  };
+};
+
 // export const logoutUserThunk = () => {
 //   return (dispatch) => {
 //     axios
@@ -29,6 +40,7 @@ export const loginUserThunk = ({ email, password }) => {
 // };
 
 const initialState = {
+  id: 0,
   fullName: "",
   password: "",
   email: "",
@@ -41,6 +53,7 @@ export const userReducer = (state = initialState, action) => {
     case LOGIN_USER: {
       return {
         ...state,
+        id: action.data.id,
         fullName: action.data.fullName,
         password: action.data.password,
         email: action.data.email,
@@ -51,6 +64,7 @@ export const userReducer = (state = initialState, action) => {
     case LOGOUT_USER: {
       return {
         ...state,
+        id: 0,
         fullName: "",
         password: "",
         email: "",
