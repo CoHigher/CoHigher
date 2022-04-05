@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import login_image from '../assets/login-image.jpg'
 import google_icon from '../assets/google-icon.png'
 
 const Login = () => {
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
     <div className="Login_page">
@@ -19,15 +22,27 @@ const Login = () => {
                 <hr className="Break_Lines"></hr>
               </section>
               <h4>Email</h4>
-                <input className="Sigup_buttons" placeholder='mail@website.com'></input>
+                <input 
+                  className="Sigup_buttons" 
+                  placeholder='mail@website.com'
+                  onChange = {e => {setEmail(e.target.value)}}
+                ></input>
                 <h4>Password</h4>
-                <input className="Sigup_buttons" placeholder='Min. 8 character'></input>
+                <input 
+                  className="Sigup_buttons" 
+                  placeholder='Min. 8 character'
+                  onChange = {e => {setPassword(e.target.value)}}
+                ></input>
               <section className="Remember_Pass">
                 <h4><input className="Remember_Check" type="checkbox"/>Remember Me</h4>
-                <a href="#"><h4>Forget password</h4></a>
+                <a href="/passwordreset"><h4>Forget password</h4></a>
               </section>
-              <button className="Login_Button">Login</button>
-              <h4>Not registered yet? <a href="#">Create an Account</a></h4>
+              <button 
+                className="Login_Button"
+                type="submit"
+                onClick = {() => {loginUserThunk(loginData.username, loginData.password)}}
+              >Login</button>
+              <h4>Not registered yet? <a href="/signup">Create an Account</a></h4>
           </div>
           <section className="Bottom_Title">© Cohigher 2022</section>
         </div>
