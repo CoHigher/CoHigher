@@ -1,13 +1,14 @@
 import React  from "react";
 import JobsContainer from "./container/JobsContainer";
-import Login from "./container/LoginContainer"
-import photo from './assets/img-academy-oqxuxY.jpeg';
+import Login from "./container/LoginContainer";
+import SignUpContainer from "./container/SignUpContainer";
+import "./index.css";
 
 const App = (props) => {
   props.store
-  return <div>
-    <Login />
-  </div>;
+  return (
+  <Login />
+  )
 };
 
 export default App;
