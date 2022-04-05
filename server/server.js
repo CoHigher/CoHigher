@@ -4,14 +4,12 @@ const app = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
-
+const cookieParser = require("cookie-parser");
 
 // controller
 const userJobsController = require("/Users/yasir/Desktop/CoHigher/server/controllers.js");
 
-
 // handle parsing request body
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -27,15 +25,16 @@ app.use(express.static(path.resolve(__dirname, "../client")));
 // Body Parser Middleware
 app.use(bodyParser.json());
 
-// Index Route
+//  Routes
 app.get("/index", (req, res) => {
   res.send("Invalid Endpoint");
 });
 
+//Routes/DB test route
 app.get("/test", userJobsController.signup, (req, res) => {
-  res.status(200).send(res.locals)
+  res.status(200).cookie('user1','verified').send(res.locals)
 });
-// Use Routes
+
 
 //express error handler
 app.use((err, req, res, next) => {
@@ -53,4 +52,3 @@ module.exports = {
   app,
 };
 
-// End of file
