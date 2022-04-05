@@ -1,14 +1,15 @@
-console.log('Entry in js');
-import ReactDOM from 'react-dom';
-import React, { createContext, useEffect, useState } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import App from './App.jsx';
-import 'bootstrap/dist/css/bootstrap.min.css';
-// import additional components for routing
+import ReactDOM from "react-dom";
+import React, { createContext, useEffect, useState } from "react";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import App from "./App.jsx";
+import store from "./redux/store";
+import { Provider } from "react-redux";
 
 ReactDOM.render(
-  <BrowserRouter>
-    <App />
-  </BrowserRouter>,
-  document.getElementById('root')
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById("root")
 );
