@@ -32,5 +32,22 @@ userJobsController.login = (req, res, next) => {
   
 };
 
+userJobsController.getUserJobs = (req, res, next) => {
+  let userId = 1;
+  const sqlQuery = `SELECT * FROM JOBS WHERE userID = '${userId}'`
+
+  db.query(sqlQuery)
+    .then(payload => {
+      res.locals = payload.rows;
+      next();
+    }).catch(err=>{
+      return next({
+        log:'Error in userJobsController.getUserJobs',
+        message: 'Cant get user jobs'
+      });
+    });
+
+};
+
 
 module.exports = userJobsController;
