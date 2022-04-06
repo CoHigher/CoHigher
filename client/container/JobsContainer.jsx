@@ -18,6 +18,7 @@ class JobsContainer extends React.Component {
     this.state = {
       clickedAddButton: false,
       jobData: {},
+      clickedUpdateCard: false,
     };
   }
 
@@ -26,27 +27,35 @@ class JobsContainer extends React.Component {
   }
 
   addClickedHandler = () => {
-    // console.log('Adding job');
     this.setState({ clickedAddButton: true });
   };
 
   onCardClickHandler = (data) => {
     console.log("Works on click in class");
     console.log(data);
-    this.setState({ clickedAddButton: true, jobData: data });
+    this.setState({
+      clickedAddButton: true,
+      jobData: data,
+      clickedUpdateCard: true,
+    });
   };
 
   onSubmitJobHandler = (data) => {
-    // console.log('Submitting job');
-    // console.log('jobdescription', data.jobdescription)
-    // console.log('salaryrange' , data.salaryrange)
-    // console.log('company', data.company)
-    // console.log('location', data.location)
-    // console.log('jobstatus',data.jobstatus);
-    //this.props.addJobThunk();
-    //this just for test
-    this.props.addJobThunk(data);
-    this.setState({ clickedAddButton: false });
+    if (!this.state.clickedUpdateCard) {
+      this.props.addJobThunk(data);
+    } else {
+      this.props.updateJobThunk(Object.assign({}, this.state.jobData, data));
+    }
+    this.setState({
+      clickedAddButton: false,
+      jobData: {},
+      clickedUpdateCard: false,
+    });
+  };
+
+  onDeleteCard = (jobId) => {
+    console.log("Is it comming here");
+    this.props.deleteJobThunk(jobId);
   };
 
   render() {
@@ -68,11 +77,10 @@ class JobsContainer extends React.Component {
     if (this.state.clickedAddButton) {
       return (
         <div>
-          {/* Add Field Props
-        <button onClick={this.onSubmitJobHandler} type="button">Submit</button> */}
           <AddJobForm
             info={this.state.jobData}
             onSubmitJobHandler={this.onSubmitJobHandler}
+            userId={this.props.user.id}
           />
         </div>
       );
@@ -83,30 +91,35 @@ class JobsContainer extends React.Component {
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
+          onDeleteCard={this.onDeleteCard}
           name="Wishlist"
           jobs={wishlist}
         />
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
+          onDeleteCard={this.onDeleteCard}
           name="Applied"
           jobs={applied}
         />
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
+          onDeleteCard={this.onDeleteCard}
           name="Recruiter call"
           jobs={recruitercall}
         />
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
+          onDeleteCard={this.onDeleteCard}
           name="Interview"
           jobs={interview}
         />
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
+          onDeleteCard={this.onDeleteCard}
           name="Offer"
           jobs={offer}
         />

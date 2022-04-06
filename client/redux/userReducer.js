@@ -19,12 +19,12 @@ export const loginUserThunk = ({ email, password }) => {
 
 export const createUserThunk = (data) => {
   return (dispatch) => {
-    console.log("In thunk ", data);
+    console.log("In createUser thunk ", data);
     axios
-      .post("/test", data)
+      .post("http://localhost:3000/signup", data)
       .then((result) => {
         console.log("REsult from db", result);
-        dispatch(loginUserAction(result));
+        dispatch(loginUserAction(result.data[0]));
       })
       .catch((err) => console.log(err));
   };
@@ -43,10 +43,10 @@ export const createUserThunk = (data) => {
 
 const initialState = {
   id: 0,
-  fullName: "",
+  fullname: "",
   password: "",
   email: "",
-  cohortName: "",
+  cohortId: 0,
   logged: false,
 };
 
@@ -56,10 +56,10 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         id: action.data.id,
-        fullName: action.data.fullName,
+        fullname: action.data.fullname,
         password: action.data.password,
         email: action.data.email,
-        cohortName: action.data.cohortName,
+        cohortId: action.data.cohortId,
         logged: true,
       };
     }
@@ -67,10 +67,10 @@ export const userReducer = (state = initialState, action) => {
       return {
         ...state,
         id: 0,
-        fullName: "",
+        fullname: "",
         password: "",
         email: "",
-        cohortName: "",
+        cohortId: 0,
         logged: false,
       };
     }

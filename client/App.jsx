@@ -12,39 +12,25 @@ import Signup from "./container/SignUpContainer";
 import "./index.css";
 import JobsContainer from "./container/JobsContainer";
 import AddJobForm from "./components/AddJobForm";
-
-// const App = () => {
-
-//   return (
-
-//     // <div className="App">
-//     // <h1>Working App H1</h1>
-//     // </div>
-//     <div className="App">
-//       <header>
-//         <h1>CoHigher - app initial render</h1>
-//       </header>
-//       <NavBar />
-//       <Routes>
-//         <Route path="/" element={<Home />} />
-//         <Route path="/MyJobs" element={<MyJobs />} />
-//         <Route path="/Metrics" element={<Metrics />} />
-//         <Route path="/CohortView" element={<CohortView />} />
-//       </Routes>
-//     </div>
-
-//   );
-// };
-
+import { createUserThunk } from "./redux/userReducer";
 class App extends React.Component {
+  onUserCreation = (userData) => {
+    console.log("Will come in main App ", userData);
+    this.props.createUserThunk(userData);
+  };
+
   render() {
-    // if(!this.props.logged){
-    //   return(
-    //     <Routes>
-    //       <Route path="/" element={<Login />} />
-    //       <Route path="/signup" element={<Signup />} />
-    //     </Routes>)
-    // }
+    if (!this.props.logged) {
+      return (
+        <Routes>
+          <Route path="/" element={<Login />} />
+          <Route
+            path="/signup"
+            element={<Signup onUserCreation={this.onUserCreation} />}
+          />
+        </Routes>
+      );
+    }
 
     return (
       <div className="App">
@@ -65,4 +51,4 @@ const mapStateToProps = (state) => ({
   logged: state.user.logged,
 });
 
-export default connect(mapStateToProps)(App);
+export default connect(mapStateToProps, { createUserThunk })(App);

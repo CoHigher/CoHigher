@@ -6,20 +6,20 @@ const AddJobForm = (props) => {
   const [company, setCompany] = useState("");
   const [location, setLocation] = useState("");
   const [jobstatus, setjobstatus] = useState("");
+  const [interviewdate, setinterviewdate] = useState(
+    new Date().toISOString().slice(0, 10)
+  );
   const onBtnSubmit = () => {
-    const newData = {
-      company: "Apple3",
-      userId: 3,
-      location: "Angeles",
-      jobdescription: "Senior Software Engineer",
-      salaryrange: "200,000-300,000",
-      jobstatus: "phone interview",
-      interviewdate: "2022-05-15",
-      hiredstatus: false,
+    const data = {
+      jobdescription,
+      salaryrange,
+      company,
+      location,
+      jobstatus,
+      userId: props.userId,
+      interviewdate,
     };
-    const data = { jobdescription, salaryrange, company, location, jobstatus };
-    data.userId = 1;
-    props.onSubmitJobHandler(newData);
+    props.onSubmitJobHandler(data);
   };
 
   useEffect(() => {
@@ -28,6 +28,10 @@ const AddJobForm = (props) => {
     setCompany(props.info.company || "");
     setLocation(props.info.location || "");
     setjobstatus(props.info.jobstatus || "");
+    setinterviewdate(
+      props.info.interviewdate?.slice(0, 10) ||
+        new Date().toISOString().slice(0, 10)
+    );
   }, []);
 
   return (
@@ -61,6 +65,13 @@ const AddJobForm = (props) => {
         id="jobstatus"
         onChange={(e) => setjobstatus(e.target.value)}
         value={jobstatus}
+      />
+      <label htmlFor="interviewdate">interviewdate</label>
+      <input
+        id="interviewdate"
+        type="date"
+        onChange={(e) => setinterviewdate(e.target.value)}
+        value={interviewdate}
       />
       <button onClick={onBtnSubmit} type="button">
         Submit
