@@ -32,7 +32,7 @@ app.get("/index", (req, res) => {
 
 // signup route
 app.post(
-  "/test",
+  "/signup",
   userJobsController.validateUser,
   userJobsController.signup,
   (req, res) => {

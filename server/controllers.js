@@ -3,15 +3,13 @@ const userJobsController = {};
 
 userJobsController.validateUser = (req, res, next) => {
   const { email, password } = req.body;
-  const sqlQuery = `SELECT * FROM USERS WHERE email = '${email}`;
+  const sqlQuery = `SELECT * FROM USERS WHERE email = '${email}'`;
   db.query(sqlQuery)
     .then((payload) => {
       res.locals = payload.rows;
       if (res.locals.length > 0) {
-        return next({
-          log: "Error in userJobsController.validateUser",
-          message: "Cant validate user",
-        });
+        res.locals.message = "User already exists";
+        return next();
       } else {
         return next();
       }
