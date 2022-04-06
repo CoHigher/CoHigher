@@ -9,9 +9,9 @@ export const logoutUserAction = () => ({ type: LOGOUT_USER });
 export const loginUserThunk = ({ email, password }) => {
   return (dispatch) => {
     axios
-      .post("/login", { email, password })
+      .post("http://localhost:3000/login", { email, password })
       .then((result) => {
-        dispatch(loginUserAction(result));
+        dispatch(loginUserAction(result.data[0]));
       })
       .catch((err) => console.log(err));
   };

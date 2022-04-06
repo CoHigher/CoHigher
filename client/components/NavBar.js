@@ -14,9 +14,9 @@ const NavBar = () => {
     //   </Navbar>
     // </>
     <ul className="navbar-nav">
-      <a href="/" className="nav-link m-auto px-5">
+      <Link to="/" className="nav-link m-auto px-5">
         Home
-      </a>
+      </Link>
       <Link to="/MyJobs" className="nav-link m-auto px-5">
         My Job Board
       </Link>
