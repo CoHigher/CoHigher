@@ -22,7 +22,11 @@ class JobsContainer extends React.Component {
   }
 
   componentDidMount() {
+<<<<<<< HEAD
     //this.props.getJobsThunk();
+=======
+    this.props.getJobsThunk(3);
+>>>>>>> dev
   }
 
   addClickedHandler = () => {
@@ -45,7 +49,7 @@ class JobsContainer extends React.Component {
     // console.log('jobstatus',data.jobstatus);
     //this.props.addJobThunk();
     //this just for test
-    this.props.addJobAction(data);
+    this.props.addJobThunk(data);
     this.setState({ clickedAddButton: false });
   };
 
@@ -61,8 +65,8 @@ class JobsContainer extends React.Component {
       if (job.jobstatus === "wishlist") wishlist.push(job);
       if (job.jobstatus === "applied") applied.push(job);
       if (job.jobstatus === "recruitercall") recruitercall.push(job);
-      if (job.jobstatus === "interview") interview.push(job);
-      if (job.jobstatus === "offer") offer.push(job);
+      if (job.jobstatus === "phone interview") interview.push(job);
+      if (job.jobstatus === "final round") offer.push(job);
     });
 
     if (this.state.clickedAddButton) {
@@ -117,6 +121,7 @@ class JobsContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
   jobs: state.jobs.jobs,
+  user: state.user,
 });
 
 export default connect(mapStateToProps, {

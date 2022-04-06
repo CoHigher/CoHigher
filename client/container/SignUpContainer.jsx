@@ -1,12 +1,26 @@
 import React, { useState } from 'react';
 import login_image from '../assets/login-image.jpg'
 import google_icon from '../assets/google-icon.png'
+import {createUserThunk} from '../redux/userReducer';
+import axios from 'axios';
 
-const Login = () => {
+const Signup = () => {
   const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [cohort, setCohort] = useState("");
+
+  const onUserCreation = () =>{
+    console.log('On click in create user')
+    //createUserThunk({user,email,password,cohort});
+    axios
+    .get("http://localhost:3000/test", {user,email,password,cohort})
+    .then((result) => {
+      console.log("REsult from db", result);
+      //dispatch(loginUserAction(result));
+    })
+    .catch((err) => console.log(err));
+  };
 
   return (
     <div className="Login_page">
@@ -45,10 +59,10 @@ const Login = () => {
               <button 
                 className="Login_Button2"
                 type="submit"
-                onClick = {() => {CreateUserThunk(user, email, password, cohort)}}
+                onClick = {() => {onUserCreation()}}
               >Create account</button>
               <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign up with Google</button>
-              <h4 className="Centered_H4">Already have an account? <a href="#">Log in</a></h4>
+              <h4 className="Centered_H4">Already have an account? <a href="/">Log in</a></h4>
           </div>
           <section className="Bottom_Title">© Cohigher 2022</section>
         </div>
@@ -60,4 +74,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Signup;

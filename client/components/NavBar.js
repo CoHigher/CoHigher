@@ -1,7 +1,7 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 // import Navbar from 'react-bootstrap/Navbar';
-import { Navbar } from 'react-bootstrap';
+import { Navbar } from "react-bootstrap";
 
 const NavBar = () => {
   return (
@@ -14,9 +14,9 @@ const NavBar = () => {
     //   </Navbar>
     // </>
     <ul className="navbar-nav">
-      <Link to="/" className="nav-link m-auto px-5">
+      <a href="/" className="nav-link m-auto px-5">
         Home
-      </Link>
+      </a>
       <Link to="/MyJobs" className="nav-link m-auto px-5">
         My Job Board
       </Link>
