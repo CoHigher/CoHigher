@@ -15,7 +15,7 @@ const JobCard = (props) => {
     props.onDeleteCard(props.info.id);
   };
   return (
-    <div>
+    <div className="Job_Card">
       <a
         href="/form"
         onClick={(e) => {
@@ -23,14 +23,16 @@ const JobCard = (props) => {
           checkClick();
         }}
       >
-        <div style={{ margin: "6px" }}>
-          <h3>{jobdescription}</h3>
-          <p>{company}</p>
+        <div className="Job-Text">
+          <h3 className="Job_Title">{jobdescription}</h3>
+          <p className="Job_Title">{company}</p>
         </div>
       </a>
-      <button onClick={onDelete} type="button">
-        Delete Card
+      <div className="button_container">
+      <button className="Delete_Button"onClick={onDelete} type="button">
+        X
       </button>
+      </div>
     </div>
   );
 };

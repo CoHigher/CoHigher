@@ -8,6 +8,7 @@ import {
 } from "../redux/jobReducer";
 import Jobs from "../components/Jobs";
 import AddJobForm from "../components/AddJobForm";
+import NavBar from "../components/NavBar";
 
 //Testing Jobs
 import { addJobAction } from "../redux/jobReducer";
@@ -87,42 +88,45 @@ class JobsContainer extends React.Component {
     }
 
     return (
-      <div style={{ display: "flex" }}>
-        <Jobs
-          onCardClickHandler={this.onCardClickHandler}
-          addClickedHandler={this.addClickedHandler}
-          onDeleteCard={this.onDeleteCard}
-          name="Wishlist"
-          jobs={wishlist}
-        />
-        <Jobs
-          onCardClickHandler={this.onCardClickHandler}
-          addClickedHandler={this.addClickedHandler}
-          onDeleteCard={this.onDeleteCard}
-          name="Applied"
-          jobs={applied}
-        />
-        <Jobs
-          onCardClickHandler={this.onCardClickHandler}
-          addClickedHandler={this.addClickedHandler}
-          onDeleteCard={this.onDeleteCard}
-          name="Recruiter call"
-          jobs={recruitercall}
-        />
-        <Jobs
-          onCardClickHandler={this.onCardClickHandler}
-          addClickedHandler={this.addClickedHandler}
-          onDeleteCard={this.onDeleteCard}
-          name="Interview"
-          jobs={interview}
-        />
-        <Jobs
-          onCardClickHandler={this.onCardClickHandler}
-          addClickedHandler={this.addClickedHandler}
-          onDeleteCard={this.onDeleteCard}
-          name="Offer"
-          jobs={offer}
-        />
+      <div className="Main_Container">
+        <NavBar />
+          <div className="Job_Container">
+            <Jobs className="Wishlist"
+              onCardClickHandler={this.onCardClickHandler}
+              addClickedHandler={this.addClickedHandler}
+              onDeleteCard={this.onDeleteCard}
+              name="Wishlist"
+              jobs={wishlist}
+            />
+            <Jobs className="Applied"
+              onCardClickHandler={this.onCardClickHandler}
+              addClickedHandler={this.addClickedHandler}
+              onDeleteCard={this.onDeleteCard}
+              name="Applied"
+              jobs={applied}
+            />
+            <Jobs className="Recruiter"
+              onCardClickHandler={this.onCardClickHandler}
+              addClickedHandler={this.addClickedHandler}
+              onDeleteCard={this.onDeleteCard}
+              name="Recruiter call"
+              jobs={recruitercall}
+            />
+            <Jobs className="Interview"
+              onCardClickHandler={this.onCardClickHandler}
+              addClickedHandler={this.addClickedHandler}
+              onDeleteCard={this.onDeleteCard}
+              name="Interview"
+              jobs={interview}
+            />
+            <Jobs className="Offer"
+              onCardClickHandler={this.onCardClickHandler}
+              addClickedHandler={this.addClickedHandler}
+              onDeleteCard={this.onDeleteCard}
+              name="Offer"
+              jobs={offer}
+            />
+        </div>
       </div>
     );
   }

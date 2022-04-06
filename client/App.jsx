@@ -23,7 +23,7 @@ class App extends React.Component {
     if (!this.props.logged) {
       return (
         <Routes>
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<JobsContainer />} />
           <Route
             path="/signup"
             element={<Signup onUserCreation={this.onUserCreation} />}

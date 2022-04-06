@@ -14,13 +14,13 @@ const Jobs = (props) => {
     );
   });
   return (
-    <div>
+    <div className="Jobs_Section">
       <h2>{name}</h2>
       <p>{`${jobs.length} Jobs`}</p>
-      <button onClick={() => addClickedHandler(name)} type="button">
+      <button className="Add_Job_Button" onClick={() => addClickedHandler(name)} type="button">
         +
       </button>
-      <div style={{ display: "flex" }}>{jobsCards}</div>
+      {jobsCards}
     </div>
   );
 };
