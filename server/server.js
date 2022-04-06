@@ -67,6 +67,17 @@ app.delete("/test6", userJobsController.deleteUserJob, (req, res) => {
   res.status(200).send(res.locals);
 });
 
+//Github will send a temporary code you'll need a route to handle that request, retrieve the code from the url, 
+//POST it back to GitHub, and finally receive the user's token in GitHub's response to your POST.
+app.get("/getjobs/:userId", userJobsController.getUserJobs, (req, res) => {
+  console.log("Data returned", res.locals);
+  res.status(200).send(res.locals);
+});
+
+app.get("/github/auth", userJobsController.gitOAuth, (req, res) => {
+  res.status(200).send(res.locals);
+});
+
 //express error handler
 app.use((err, req, res, next) => {
   console.log(err);

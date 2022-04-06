@@ -1,5 +1,6 @@
 const db = require("./model.js");
 const userJobsController = {};
+const axios = require('axios');
 
 
 userJobsController.validateUser = (req, res, next) => {
@@ -41,7 +42,6 @@ userJobsController.signup = (req, res, next) => {
         });
 
       });
-    });
 };
 
 userJobsController.login = (req, res, next) => {
@@ -67,7 +67,6 @@ userJobsController.login = (req, res, next) => {
         });
 
       });
-    });
 };
 
 userJobsController.getUserJobs = (req, res, next) => {
@@ -226,5 +225,32 @@ userJobsController.deleteUserJob = (req, res, next) => {
       });
     });
 };
+
+userJobsController.gitOAuth = (req, res, next) => {
+  const body = {
+    client_id: '72859ee5baefaa57a98c',
+    client_secret: '4de3df3bdd6e657def283fd020c33ec6853d207b',
+    token: req.query.code,
+  };
+
+  const opts = {
+    method: 'POST',
+    headers: { accept: 'application/json' },
+  };
+  const url = `https://github.com/login/oauth/access_token?client_id=${body.client_id}&redirect_uri=http://localhost:8080/github/auth&client_secret=${body.client_secret}&code=${body.token}`;
+  axios(url, opts)
+    .then((response) => {
+      const token = response.data.access_token;
+      res.locals.authToken = token;
+      res.cookie('token', token);
+      next();
+    })
+    .catch((err) => {
+      return next({
+        log: "Error in userJobsController.gitOAuth",
+        message: "Cannot Authorize user",
+      });
+    });
+}
 
 module.exports = userJobsController;

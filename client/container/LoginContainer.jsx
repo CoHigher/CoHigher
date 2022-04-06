@@ -15,7 +15,9 @@ const Login = () => {
           <div className="Info" >
               <h1>Welcome Back</h1>
               <h5>We are glad you are back! Please enter your details.</h5>
-              <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign in with Google</button>
+              <a href="https://github.com/login/oauth/authorize?client_id=72859ee5baefaa57a98c&redirect_uri=http://localhost:3000/github/auth">
+                <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign in with Google</button>
+              </a>
               <section className="Sign_Section">
                 <hr className="Break_Lines"></hr>
                 <span className="Placeholder_Text">or Sign in with Email</span>
@@ -29,6 +31,7 @@ const Login = () => {
                 ></input>
                 <h4>Password</h4>
                 <input 
+                  type="password"
                   className="Sigup_buttons" 
                   placeholder='Min. 8 character'
                   onChange = {e => {setPassword(e.target.value)}}
@@ -40,7 +43,7 @@ const Login = () => {
               <button 
                 className="Login_Button"
                 type="submit"
-                onClick = {() => {loginUserThunk(email, password)}}
+                onClick = {() => {loginUserThunk(loginData.username, loginData.password)}}
               >Login</button>
               <h4>Not registered yet? <a href="/signup">Create an Account</a></h4>
           </div>

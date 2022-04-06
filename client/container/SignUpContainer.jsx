@@ -44,6 +44,7 @@ const Signup = () => {
                 ></input>
                 <h4>Password</h4>
                 <input 
+                  type="password"
                   className="Sigup_buttons" 
                   placeholder='Create a password'
                   onChange = {e => {setPassword(e.target.value)}}
@@ -61,7 +62,9 @@ const Signup = () => {
                 type="submit"
                 onClick = {() => {onUserCreation()}}
               >Create account</button>
-              <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign up with Google</button>
+              <a href="https://github.com/login/oauth/authorize?client_id=72859ee5baefaa57a98c&redirect_uri=http://localhost:3000/github/auth">
+                <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign up with Google</button>
+              </a>
               <h4 className="Centered_H4">Already have an account? <a href="/">Log in</a></h4>
           </div>
           <section className="Bottom_Title">© Cohigher 2022</section>
