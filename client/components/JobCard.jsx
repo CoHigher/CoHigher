@@ -25,10 +25,7 @@ const JobCard = (props) => {
       >
         <div style={{ margin: "6px" }}>
           <h3>{jobdescription}</h3>
-          <p>{salaryrange}</p>
           <p>{company}</p>
-          <p>{location}</p>
-          <p>{jobstatus}</p>
         </div>
       </a>
       <button onClick={onDelete} type="button">
