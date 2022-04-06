@@ -14,10 +14,10 @@ const NavBar = () => {
     //   </Navbar>
     // </>
     <ul className="navbar-nav">
-      <a href="/" className="nav-link m-auto px-5">
+      <Link to="/" className="nav-link m-auto px-5">
         Home
-      </a>
-      <a href="/MyJobs" className="nav-link m-auto px-5">
+      </Link>
+      <Link to="/MyJobs" className="nav-link m-auto px-5">
         My Job Board
       </a>
       <a to="/Metrics" className="nav-link m-auto px-5">
