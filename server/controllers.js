@@ -1,34 +1,71 @@
 const db = require("./model.js");
 const userJobsController = {};
 
-userJobsController.signup = (req, res, next) => {
-  const sqlQuery = "SELECT * FROM USERS ";
 
+userJobsController.validateUser = (req, res, next) => {
+  const {email, password} = req.body;
+  const sqlQuery = `SELECT * FROM USERS WHERE email = '${email}`;
   db.query(sqlQuery)
-    .then((payload) => {
+    .then(payload => {
       res.locals = payload.rows;
-      next();
-    })
-    .catch((err) => {
+      if (res.locals.length > 0) {
+        return next({
+          log:'Error in userJobsController.validateUser',
+          message:'Cant validate user'
+        });
+      } else {
+        return next();
+      }
+    }).catch(err=>{
       return next({
-        log: "Error in userJobController.signup",
-        message: "Cant get users",
+        log:'Error in userJobsController.validateUser',
+        message:'Cant validate user'
+      });
+    }
+  );
+
+
+};
+
+userJobsController.signup = (req, res, next) => {
+    const {fullname, email, password, cohortId} = req.body;
+    const sqlQuery = `INSERT INTO USERS (fullname, email, password, cohortId) VALUES ('${fullname}','${email}', '${password}', '${cohortId}') RETURNING *`;
+    db.query(sqlQuery)
+      .then(payload => {
+        res.locals = payload.rows;
+        next();
+      }).catch(err=>{
+        return next({
+          log:'Error in userJobController.signup',
+          message:'Cant get users'
+        });
+
       });
     });
 };
 
 userJobsController.login = (req, res, next) => {
-  const sqlQuery = "";
 
-  db.query(sqlQuery)
-    .then((payload) => {
-      res.locals = payload.rows;
-      next();
-    })
-    .catch((err) => {
-      return next({
-        log: "Error in userJobController.login",
-        message: "Cant login",
+
+    const {email, password} = req.body;
+    const sqlQuery = `SELECT * FROM USERS WHERE email = '${req.body.email}' AND password = '${req.body.password}'`;
+
+    db.query(sqlQuery)
+      .then(payload => {
+        if (payload.rows.length === 0) {
+          return next({
+            log:'Error in userJobsController.login',
+            message:'Cant login'
+          });
+        }
+        res.locals = payload.rows;
+        next();
+      }).catch(err=>{
+        return next({
+          log:'Error in userJobController.login',
+          message:'Cant login'
+        });
+
       });
     });
 };
