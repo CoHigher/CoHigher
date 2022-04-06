@@ -15,7 +15,6 @@ export const getJobsThunk = (userId) => {
     axios
       .get(`http://localhost:3000/getjobs/${userId}`)
       .then((jobs) => {
-        console.log("In thunk getting jobs ", jobs);
         dispatch(getJobsAction(jobs.data));
       })
       .catch((err) => console.log(err));
@@ -27,19 +26,18 @@ export const addJobThunk = (data) => {
     axios
       .post(`http://localhost:3000/addjob`, data)
       .then((result) => {
-        console.log("In thunk data", result);
         dispatch(addJobAction(result.data));
       })
       .catch((err) => console.log(err));
   };
 };
 
-export const updateJobThunk = (jobId) => {
+export const updateJobThunk = (data) => {
   return (dispatch) => {
     axios
-      .post(`/updateJob/${jobId}`, data)
+      .put(`http://localhost:3000/updatejob`, data)
       .then((result) => {
-        dispatch(updateJobAction(result));
+        dispatch(updateJobAction(result.data));
       })
       .catch((err) => console.log(err));
   };
@@ -48,9 +46,9 @@ export const updateJobThunk = (jobId) => {
 export const deleteJobThunk = (jobId) => {
   return (dispatch) => {
     axios
-      .post(`/deleteJob/${jobId}`)
+      .delete(`http://localhost:3000/deletejob/${jobId}`)
       .then((result) => {
-        dispatch(deleteJobAction(result));
+        dispatch(deleteJobAction(result.data));
       })
       .catch((err) => console.log(err));
   };
@@ -158,8 +156,6 @@ export const jobReducer = (state = initialState, action) => {
       };
     }
     case ADD_JOB: {
-      console.log("In add job reducer");
-      console.log(action.data);
       return {
         ...state,
         jobs: [...state.jobs, action.data[0]],
@@ -169,13 +165,7 @@ export const jobReducer = (state = initialState, action) => {
       return {
         ...state,
         jobs: state.jobs.map((job) => {
-          if (job.id === action.data.id) {
-            job.jobdescription = action.data.jobdescription;
-            job.company = action.data.company;
-            job.salaryrange = action.data.salaryrange;
-            job.location = action.data.location;
-            job.jobstatus = action.data.jobstatus;
-          }
+          if (job.id === action.data[0].id) job = action.data[0];
           return job;
         }),
       };
@@ -183,7 +173,7 @@ export const jobReducer = (state = initialState, action) => {
     case DELETE_JOB: {
       return {
         ...state,
-        jobs: state.jobs.filter((job) => job.id !== action.data.id),
+        jobs: state.jobs.filter((job) => job.id !== action.data[0].id),
       };
     }
     default:
