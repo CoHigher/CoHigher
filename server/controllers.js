@@ -1,71 +1,64 @@
-const db = require("./model.js");
+const db = require('./model.js');
 const userJobsController = {};
 
-
 userJobsController.validateUser = (req, res, next) => {
-  const {email, password} = req.body;
+  const { email, password } = req.body;
   const sqlQuery = `SELECT * FROM USERS WHERE email = '${email}`;
   db.query(sqlQuery)
-    .then(payload => {
+    .then((payload) => {
       res.locals = payload.rows;
       if (res.locals.length > 0) {
         return next({
-          log:'Error in userJobsController.validateUser',
-          message:'Cant validate user'
+          log: 'Error in userJobsController.validateUser',
+          message: 'Cant validate user',
         });
       } else {
         return next();
       }
-    }).catch(err=>{
+    })
+    .catch((err) => {
       return next({
-        log:'Error in userJobsController.validateUser',
-        message:'Cant validate user'
+        log: 'Error in userJobsController.validateUser',
+        message: 'Cant validate user',
       });
-    }
-  );
-
-
+    });
 };
 
 userJobsController.signup = (req, res, next) => {
-    const {fullname, email, password, cohortId} = req.body;
-    const sqlQuery = `INSERT INTO USERS (fullname, email, password, cohortId) VALUES ('${fullname}','${email}', '${password}', '${cohortId}') RETURNING *`;
-    db.query(sqlQuery)
-      .then(payload => {
-        res.locals = payload.rows;
-        next();
-      }).catch(err=>{
-        return next({
-          log:'Error in userJobController.signup',
-          message:'Cant get users'
-        });
-
+  const { fullname, email, password, cohortId } = req.body;
+  const sqlQuery = `INSERT INTO USERS (fullname, email, password, cohortId) VALUES ('${fullname}','${email}', '${password}', '${cohortId}') RETURNING *`;
+  db.query(sqlQuery)
+    .then((payload) => {
+      res.locals = payload.rows;
+      next();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in userJobController.signup',
+        message: 'Cant get users',
       });
     });
 };
 
 userJobsController.login = (req, res, next) => {
+  const { email, password } = req.body;
+  const sqlQuery = `SELECT * FROM USERS WHERE email = '${req.body.email}' AND password = '${req.body.password}'`;
 
-
-    const {email, password} = req.body;
-    const sqlQuery = `SELECT * FROM USERS WHERE email = '${req.body.email}' AND password = '${req.body.password}'`;
-
-    db.query(sqlQuery)
-      .then(payload => {
-        if (payload.rows.length === 0) {
-          return next({
-            log:'Error in userJobsController.login',
-            message:'Cant login'
-          });
-        }
-        res.locals = payload.rows;
-        next();
-      }).catch(err=>{
+  db.query(sqlQuery)
+    .then((payload) => {
+      if (payload.rows.length === 0) {
         return next({
-          log:'Error in userJobController.login',
-          message:'Cant login'
+          log: 'Error in userJobsController.login',
+          message: 'Cant login',
         });
-
+      }
+      res.locals = payload.rows;
+      next();
+    })
+    .catch((err) => {
+      return next({
+        log: 'Error in userJobController.login',
+        message: 'Cant login',
       });
     });
 };
@@ -74,7 +67,7 @@ userJobsController.getUserJobs = (req, res, next) => {
   // {
   //   "userId":1
   // }
-  console.log("We are getting jobs!");
+  console.log('We are getting jobs!');
   const { userId } = req.params;
 
   const sqlQuery = `SELECT * FROM JOBS WHERE userID = '${userId}'`;
@@ -86,8 +79,8 @@ userJobsController.getUserJobs = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: "Error in userJobsController.getUserJobs",
-        message: "Cant get user jobs",
+        log: 'Error in userJobsController.getUserJobs',
+        message: 'Cant get user jobs',
       });
     });
 };
@@ -107,8 +100,8 @@ userJobsController.getCohortJobs = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: "Error in userJobsController.getCohortJobs",
-        message: "Cant get cohort jobs",
+        log: 'Error in userJobsController.getCohortJobs',
+        message: 'Cant get cohort jobs',
       });
     });
 };
@@ -146,7 +139,7 @@ userJobsController.postUserJob = (req, res, next) => {
     interviewdate,
     hiredstatus,
   } = req.body;
-  console.log("In add job", req.body);
+  console.log('In add job', req.body);
   // destructure req.body to get the values
   const sqlQuery = `INSERT INTO JOBS (company, userId, location,jobdescription, salaryrange, jobstatus, interviewdate, hiredstatus)
       VALUES ('${company}', '${userId}', '${location}', '${jobdescription}', '${salaryrange}', '${jobstatus}', '${interviewdate}', '${hiredstatus}') RETURNING *`;
@@ -155,14 +148,14 @@ userJobsController.postUserJob = (req, res, next) => {
 
   db.query(sqlQuery)
     .then((payload) => {
-      console.log("It comes here though");
+      console.log('It comes here though');
       res.locals = payload.rows;
       next();
     })
     .catch((err) => {
       return next({
-        log: "Error in userJobsController.postUserJob",
-        message: "Cant post user job",
+        log: 'Error in userJobsController.postUserJob',
+        message: 'Cant post user job',
       });
     });
 };
@@ -200,8 +193,8 @@ userJobsController.updateUserJob = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: "Error in userJobsController.updateUserJob",
-        message: "Cant update user job",
+        log: 'Error in userJobsController.updateUserJob',
+        message: 'Cant update user job',
       });
     });
 };
@@ -221,8 +214,8 @@ userJobsController.deleteUserJob = (req, res, next) => {
     })
     .catch((err) => {
       return next({
-        log: "Error in userJobsController.deleteUserJob",
-        message: "Cant delete user job",
+        log: 'Error in userJobsController.deleteUserJob',
+        message: 'Cant delete user job',
       });
     });
 };

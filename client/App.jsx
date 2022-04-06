@@ -54,10 +54,10 @@ class App extends React.Component {
         <header>
           <h1>CoHigher - app initial render</h1>
         </header>
-        <NavBar />
+        {/* <NavBar /> */}
         <Routes>
           <Route path="/" element={<JobsContainer />} />
-          <Route path="/MyJobs" element={<MyJobs />} />
+          {/* <Route path="/MyJobs" element={<MyJobs />} /> */}
           <Route path="/Metrics" element={<Metrics />} />
           <Route path="/CohortView" element={<CohortView />} />
           {/* <Route path="/form" element={<AddJobForm />} /> */}
