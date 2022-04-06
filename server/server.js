@@ -36,7 +36,8 @@ app.get("/test", userJobsController.signup, (req, res) => {
 });
 
 // get individual user jobs
-app.get("/test2", userJobsController.getUserJobs, (req, res) => {
+app.get("/getjobs/:userId", userJobsController.getUserJobs, (req, res) => {
+  console.log("Data returned", res.locals);
   res.status(200).send(res.locals);
 });
 
@@ -46,7 +47,8 @@ app.get("/test3", userJobsController.getCohortJobs, (req, res) => {
 });
 
 // post jobs
-app.post("/test4", userJobsController.postUserJob, (req, res) => {
+app.post("/addjob", userJobsController.postUserJob, (req, res) => {
+  console.log("In add job ", res.locals);
   res.status(200).send(res.locals);
 });
 

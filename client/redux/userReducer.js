@@ -19,9 +19,11 @@ export const loginUserThunk = ({ email, password }) => {
 
 export const createUserThunk = (data) => {
   return (dispatch) => {
+    console.log("In thunk ", data);
     axios
-      .post("/create", data)
+      .post("/test", data)
       .then((result) => {
+        console.log("REsult from db", result);
         dispatch(loginUserAction(result));
       })
       .catch((err) => console.log(err));

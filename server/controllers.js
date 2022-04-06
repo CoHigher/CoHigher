@@ -34,10 +34,14 @@ userJobsController.login = (req, res, next) => {
 };
 
 userJobsController.getUserJobs = (req, res, next) => {
-  const { userId } = req.body;
+  // {
+  //   "userId":1
+  // }
+  console.log("We are getting jobs!");
+  const { userId } = req.params;
 
   const sqlQuery = `SELECT * FROM JOBS WHERE userID = '${userId}'`;
-
+  console.log(sqlQuery);
   db.query(sqlQuery)
     .then((payload) => {
       res.locals = payload.rows;
@@ -52,6 +56,9 @@ userJobsController.getUserJobs = (req, res, next) => {
 };
 
 userJobsController.getCohortJobs = (req, res, next) => {
+  //   {
+  //   "cohortId":1
+  //   }
   const { cohortId } = req.body;
 
   const sqlQuery = `SELECT * FROM USERS,JOBS WHERE cohortId=${cohortId} AND USERS.userid=jobs.userid`;
@@ -70,6 +77,28 @@ userJobsController.getCohortJobs = (req, res, next) => {
 };
 
 userJobsController.postUserJob = (req, res, next) => {
+  //   {
+  //     "company": "Snapchat",
+  //     "userId":  3,
+  //     "location":   "Los Angeles",
+  //     "jobdescription": "Senior Software Engineer",
+  //     "salaryrange": "200,000-300,000",
+  //     "jobstatus":  "phone interview",
+  //     "interviewdate": "2022-05-15",
+  //     "hiredstatus": false
+  //  }
+
+  //   {
+  //     "company": "www",
+  //      "userId": 1,
+  //      "location": "www",
+  //      "jobdescription": "www",
+  //      "salaryrange": "www",
+  //      "jobstatus": "www",
+  //      "interviewdate": "ww",
+  //      "hiredstatus": true
+  //  }
+
   const {
     company,
     userId,
@@ -80,14 +109,16 @@ userJobsController.postUserJob = (req, res, next) => {
     interviewdate,
     hiredstatus,
   } = req.body;
+  console.log("In add job", req.body);
   // destructure req.body to get the values
   const sqlQuery = `INSERT INTO JOBS (company, userId, location,jobdescription, salaryrange, jobstatus, interviewdate, hiredstatus)
-      VALUES ('${company}', '${userId}', '${location}', '${jobdescription}', '${salaryrange}', '${jobstatus}', '${interviewdate}', '${hiredstatus}')`;
+      VALUES ('${company}', '${userId}', '${location}', '${jobdescription}', '${salaryrange}', '${jobstatus}', '${interviewdate}', '${hiredstatus}') RETURNING *`;
   //  const sqlQuery = `INSERT INTO JOBS (company, userId, location,jobdescription, salaryrange, jobstatus, interviewdate, hiredstatus)
   //  VALUES ('Square', 3, 'New York,New York', 'software engineer', '200,000-300,000','final round','05/09/2022',FALSE)`
 
   db.query(sqlQuery)
     .then((payload) => {
+      console.log("It comes here though");
       res.locals = payload.rows;
       next();
     })
@@ -100,6 +131,17 @@ userJobsController.postUserJob = (req, res, next) => {
 };
 
 userJobsController.updateUserJob = (req, res, next) => {
+  //   {
+  //     "id": 6,
+  //    "company": "Instagram",
+  //    "location":   "Los Angeles",
+  //    "jobdescription": "Senior Software Engineer",
+  //    "salaryrange": "200,000-300,000",
+  //    "jobstatus":  "phone interview",
+  //    "interviewdate": "2022-05-15",
+  //    "hiredstatus": false
+  // }
+
   // destructure req.body to get the values
   const {
     id,
@@ -128,6 +170,9 @@ userJobsController.updateUserJob = (req, res, next) => {
 };
 
 userJobsController.deleteUserJob = (req, res, next) => {
+  //   {
+  //     "id": 6
+  // }
   // destructure req.body to get the values
   const { id } = req.body;
   const sqlQuery = `DELETE FROM JOBS WHERE id = ${id}`;

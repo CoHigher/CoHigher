@@ -40,7 +40,7 @@ const Login = () => {
               <button 
                 className="Login_Button"
                 type="submit"
-                onClick = {() => {loginUserThunk(loginData.username, loginData.password)}}
+                onClick = {() => {loginUserThunk(email, password)}}
               >Login</button>
               <h4>Not registered yet? <a href="/signup">Create an Account</a></h4>
           </div>
