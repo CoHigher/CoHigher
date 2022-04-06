@@ -35,7 +35,8 @@ userJobsController.signup = (req, res, next) => {
         log: "Error in userJobController.signup",
         message: "Cant get users",
       });
-};
+  });
+}
 
 userJobsController.login = (req, res, next) => {
   const { email, password } = req.body;
@@ -57,6 +58,7 @@ userJobsController.login = (req, res, next) => {
         log: "Error in userJobController.login",
         message: "Cant login",
       });
+    });
 };
 
 userJobsController.getUserJobs = (req, res, next) => {
