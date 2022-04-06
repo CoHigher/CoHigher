@@ -30,8 +30,13 @@ app.get("/index", (req, res) => {
   res.send("Invalid Endpoint");
 });
 
-// cookie test route
-app.get("/test", userJobsController.signup, (req, res) => {
+// signup route
+app.post("/test",userJobsController.validateUser, userJobsController.signup, (req, res) => {
+  res.status(200).cookie('user1','verified').send(res.locals)
+});
+
+//login route
+app.post("/test1", userJobsController.login, (req, res) => {
   res.status(200).cookie('user1','verified').send(res.locals)
 });
 
