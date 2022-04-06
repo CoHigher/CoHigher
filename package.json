@@ -52,6 +52,7 @@
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
+    "antd": "^4.19.5",
     "chart.js": "^3.7.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",

@@ -1,4 +1,4 @@
-const db = require("./model.js");
+const db = require('./model.js');
 const userJobsController = {};
 
 userJobsController.validateUser = (req, res, next) => {
@@ -64,7 +64,6 @@ userJobsController.getUserJobs = (req, res, next) => {
   // {
   //   "userId":1
   // }
-
   const { userId } = req.params;
 
   const sqlQuery = `SELECT * FROM JOBS WHERE userID = '${userId}'`;
@@ -75,8 +74,8 @@ userJobsController.getUserJobs = (req, res, next) => {
       next();
     }).catch((err) => {
       return next({
-        log: "Error in userJobsController.getUserJobs",
-        message: "Cant get user jobs",
+        log: 'Error in userJobsController.getUserJobs',
+        message: 'Cant get user jobs',
       });
     });
 };
@@ -96,8 +95,8 @@ userJobsController.getCohortJobs = (req, res, next) => {
       next();
     }).catch((err) => {
       return next({
-        log: "Error in userJobsController.getCohortJobs",
-        message: "Cant get cohort jobs",
+        log: 'Error in userJobsController.getCohortJobs',
+        message: 'Cant get cohort jobs',
       });
     });
 };
@@ -142,8 +141,8 @@ userJobsController.postUserJob = (req, res, next) => {
       next();
     }).catch((err) => {
       return next({
-        log: "Error in userJobsController.postUserJob",
-        message: "Cant post user job",
+        log: 'Error in userJobsController.postUserJob',
+        message: 'Cant post user job',
       });
     });
 };
@@ -187,8 +186,8 @@ userJobsController.updateUserJob = (req, res, next) => {
       next();
     }).catch((err) => {
       return next({
-        log: "Error in userJobsController.updateUserJob",
-        message: "Cant update user job",
+        log: 'Error in userJobsController.updateUserJob',
+        message: 'Cant update user job',
       });
     });
 };
@@ -208,8 +207,8 @@ userJobsController.deleteUserJob = (req, res, next) => {
       next();
     }).catch((err) => {
       return next({
-        log: "Error in userJobsController.deleteUserJob",
-        message: "Cant delete user job",
+        log: 'Error in userJobsController.deleteUserJob',
+        message: 'Cant delete user job',
       });
     });
 };

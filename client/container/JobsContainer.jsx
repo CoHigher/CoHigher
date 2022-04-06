@@ -8,6 +8,8 @@ import {
 } from "../redux/jobReducer";
 import Jobs from "../components/Jobs";
 import AddJobForm from "../components/AddJobForm";
+import SideBar from "../components/SideBar";
+import NavBar from "../components/NavBar";
 
 //Testing Jobs
 import { addJobAction } from "../redux/jobReducer";
@@ -88,6 +90,8 @@ class JobsContainer extends React.Component {
 
     return (
       <div style={{ display: "flex" }}>
+        <NavBar />
+        <SideBar />
         <Jobs
           onCardClickHandler={this.onCardClickHandler}
           addClickedHandler={this.addClickedHandler}
@@ -124,6 +128,11 @@ class JobsContainer extends React.Component {
           jobs={offer}
         />
       </div>
+      
+      
+        
+      
+      
     );
   }
 }
