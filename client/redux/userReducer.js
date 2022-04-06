@@ -42,7 +42,7 @@ export const createUserThunk = (data) => {
 // };
 
 const initialState = {
-  id: 0,
+  id: 3,
   fullName: "",
   password: "",
   email: "",

@@ -31,13 +31,18 @@ app.get("/index", (req, res) => {
 });
 
 // signup route
-app.post("/test",userJobsController.validateUser, userJobsController.signup, (req, res) => {
-  res.status(200).cookie('user1','verified').send(res.locals)
-});
+app.post(
+  "/test",
+  userJobsController.validateUser,
+  userJobsController.signup,
+  (req, res) => {
+    res.status(200).cookie("user1", "verified").send(res.locals);
+  },
+);
 
 //login route
 app.post("/test1", userJobsController.login, (req, res) => {
-  res.status(200).cookie('user1','verified').send(res.locals)
+  res.status(200).cookie("user1", "verified").send(res.locals);
 });
 
 // get individual user jobs
@@ -58,12 +63,12 @@ app.post("/addjob", userJobsController.postUserJob, (req, res) => {
 });
 
 // update jobs
-app.put("/test5", userJobsController.updateUserJob, (req, res) => {
+app.put("/updatejob", userJobsController.updateUserJob, (req, res) => {
   res.status(200).send(res.locals);
 });
 
 // delete jobs
-app.delete("/test6", userJobsController.deleteUserJob, (req, res) => {
+app.delete("/deletejob/:id", userJobsController.deleteUserJob, (req, res) => {
   res.status(200).send(res.locals);
 });
 
