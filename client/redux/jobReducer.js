@@ -13,20 +13,22 @@ export const deleteJobAction = (data) => ({ type: DELETE_JOB, data: data });
 export const getJobsThunk = (userId) => {
   return (dispatch) => {
     axios
-      .post(`/getJobs/${userId}`)
+      .get(`http://localhost:3000/getjobs/${userId}`)
       .then((jobs) => {
-        dispatch(getJobsAction(jobs));
+        console.log("In thunk getting jobs ", jobs);
+        dispatch(getJobsAction(jobs.data));
       })
       .catch((err) => console.log(err));
   };
 };
 
-export const addJobThunk = (userId) => {
+export const addJobThunk = (data) => {
   return (dispatch) => {
     axios
-      .post(`/addJob/${userId}`, data)
+      .post(`http://localhost:3000/addjob`, data)
       .then((result) => {
-        dispatch(addJobAction(result));
+        console.log("In thunk data", result);
+        dispatch(addJobAction(result.data));
       })
       .catch((err) => console.log(err));
   };
@@ -56,94 +58,94 @@ export const deleteJobThunk = (jobId) => {
 
 const initialState = {
   jobs: [
-    {
-      id: 1,
-      jobdescription: "software engineer",
-      salaryrange: "135,000-150,000",
-      company: "Microsoft",
-      location: "NY",
-      jobstatus: "wishlist",
-    },
-    {
-      id: 2,
-      jobdescription: " senior software engineer",
-      salaryrange: "135,000-150,000",
-      company: "Apple",
-      location: "NY",
-      jobstatus: "applied",
-    },
-    {
-      id: 3,
-      jobdescription: "front-end engineer",
-      salaryrange: "135,000-150,000",
-      company: "IBM",
-      location: "NY",
-      jobstatus: "recruitercall",
-    },
-    {
-      id: 4,
-      jobdescription: "back-end engineer",
-      salaryrange: "135,000-150,000",
-      company: "Meta",
-      location: "NY",
-      jobstatus: "interview",
-    },
-    {
-      id: 5,
-      jobdescription: "engineer",
-      salaryrange: "135,000-150,000",
-      company: "Bloomsburg",
-      location: "NY",
-      jobstatus: "offer",
-    },
-    {
-      id: 6,
-      jobdescription: "engineer",
-      salaryrange: "135,000-150,000",
-      company: "Capital One",
-      location: "NJ",
-      jobstatus: "wishlist",
-    },
-    {
-      id: 7,
-      jobdescription: "engineer",
-      salaryrange: "135,000-150,000",
-      company: "Netflix",
-      location: "NJ",
-      jobstatus: "applied",
-    },
-    {
-      id: 8,
-      jobdescription: "software engineer",
-      salaryrange: "135,000-150,000",
-      company: "Amazon",
-      location: "NJ",
-      jobstatus: "recruitercall",
-    },
-    {
-      id: 9,
-      jobdescription: "software engineer",
-      salaryrange: "135,000-150,000",
-      company: "Sony",
-      location: "NJ",
-      jobstatus: "interview",
-    },
-    {
-      id: 10,
-      jobdescription: "back-end engineer",
-      salaryrange: "135,000-150,000",
-      company: "Google",
-      location: "NJ",
-      jobstatus: "offer",
-    },
-    {
-      id: 11,
-      jobdescription: "front-end engineer",
-      salaryrange: "135,000-150,000",
-      company: "Adobe",
-      location: "TX",
-      jobstatus: "wishlist",
-    },
+    // {
+    //   id: 1,
+    //   jobdescription: "software engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Microsoft",
+    //   location: "NY",
+    //   jobstatus: "wishlist",
+    // },
+    // {
+    //   id: 2,
+    //   jobdescription: " senior software engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Apple",
+    //   location: "NY",
+    //   jobstatus: "applied",
+    // },
+    // {
+    //   id: 3,
+    //   jobdescription: "front-end engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "IBM",
+    //   location: "NY",
+    //   jobstatus: "recruitercall",
+    // },
+    // {
+    //   id: 4,
+    //   jobdescription: "back-end engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Meta",
+    //   location: "NY",
+    //   jobstatus: "interview",
+    // },
+    // {
+    //   id: 5,
+    //   jobdescription: "engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Bloomsburg",
+    //   location: "NY",
+    //   jobstatus: "offer",
+    // },
+    // {
+    //   id: 6,
+    //   jobdescription: "engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Capital One",
+    //   location: "NJ",
+    //   jobstatus: "wishlist",
+    // },
+    // {
+    //   id: 7,
+    //   jobdescription: "engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Netflix",
+    //   location: "NJ",
+    //   jobstatus: "applied",
+    // },
+    // {
+    //   id: 8,
+    //   jobdescription: "software engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Amazon",
+    //   location: "NJ",
+    //   jobstatus: "recruitercall",
+    // },
+    // {
+    //   id: 9,
+    //   jobdescription: "software engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Sony",
+    //   location: "NJ",
+    //   jobstatus: "interview",
+    // },
+    // {
+    //   id: 10,
+    //   jobdescription: "back-end engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Google",
+    //   location: "NJ",
+    //   jobstatus: "offer",
+    // },
+    // {
+    //   id: 11,
+    //   jobdescription: "front-end engineer",
+    //   salaryrange: "135,000-150,000",
+    //   company: "Adobe",
+    //   location: "TX",
+    //   jobstatus: "wishlist",
+    // },
   ],
 };
 
@@ -157,10 +159,10 @@ export const jobReducer = (state = initialState, action) => {
     }
     case ADD_JOB: {
       console.log("In add job reducer");
-      console.log(action);
+      console.log(action.data);
       return {
         ...state,
-        jobs: [...state.jobs, action.data],
+        jobs: [...state.jobs, action.data[0]],
       };
     }
     case UPDATE_JOB: {

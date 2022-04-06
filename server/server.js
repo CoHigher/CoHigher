@@ -7,7 +7,7 @@ const path = require("path");
 const cookieParser = require("cookie-parser");
 
 // controller
-const userJobsController = require("/Users/yasir/Desktop/CoHigher/server/controllers.js");
+const userJobsController = require("./controllers.js");
 
 // handle parsing request body
 app.use(express.json());
@@ -41,28 +41,30 @@ app.post("/test1", userJobsController.login, (req, res) => {
 });
 
 // get individual user jobs
-app.get("/test2", userJobsController.getUserJobs, (req, res) => {
-  res.status(200).send(res.locals)
+app.get("/getjobs/:userId", userJobsController.getUserJobs, (req, res) => {
+  console.log("Data returned", res.locals);
+  res.status(200).send(res.locals);
 });
 
 // get cohort user jobs
 app.get("/test3", userJobsController.getCohortJobs, (req, res) => {
-  res.status(200).send(res.locals)
+  res.status(200).send(res.locals);
 });
 
 // post jobs
-app.post("/test4", userJobsController.postUserJob, (req, res) => {
-  res.status(200).send(res.locals)
+app.post("/addjob", userJobsController.postUserJob, (req, res) => {
+  console.log("In add job ", res.locals);
+  res.status(200).send(res.locals);
 });
 
-// update jobs 
+// update jobs
 app.put("/test5", userJobsController.updateUserJob, (req, res) => {
-  res.status(200).send(res.locals)
+  res.status(200).send(res.locals);
 });
 
 // delete jobs
 app.delete("/test6", userJobsController.deleteUserJob, (req, res) => {
-  res.status(200).send(res.locals)
+  res.status(200).send(res.locals);
 });
 
 //express error handler
@@ -80,5 +82,3 @@ app.listen(port, () => {
 module.exports = {
   app,
 };
-
-
