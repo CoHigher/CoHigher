@@ -25,7 +25,7 @@ const JobCard = (props) => {
       >
         <div className="Job-Text">
           <h3 className="Job_Title">{jobdescription}</h3>
-          <p className="Job_Title">{company}</p>
+          <p className="Job_Title">{company} ({salaryrange})</p>
         </div>
       </a>
       <div className="button_container">

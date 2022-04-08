@@ -320,7 +320,7 @@ a{
 .Job_Container{
     font-family: 'Roboto', sans-serif;
     display: grid;
-    grid-template-columns: 16% 16% 16% 16% 16%;
+    grid-template-columns: 16% 16% 16% 16% 16% 20%;
     height: 95%;
 }
 

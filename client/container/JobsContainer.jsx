@@ -8,6 +8,7 @@ import {
 } from "../redux/jobReducer";
 import Jobs from "../components/Jobs";
 import AddJobForm from "../components/AddJobForm";
+import SideBar from "../components/SideBar";
 import NavBar from "../components/NavBar";
 
 //Testing Jobs
@@ -24,7 +25,7 @@ class JobsContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getJobsThunk(3);
+    this.props.getJobsThunk(this.props.user.userid);
   }
 
   addClickedHandler = () => {
@@ -70,9 +71,9 @@ class JobsContainer extends React.Component {
     this.props.jobs.forEach((job) => {
       if (job.jobstatus === "wishlist") wishlist.push(job);
       if (job.jobstatus === "applied") applied.push(job);
-      if (job.jobstatus === "recruitercall") recruitercall.push(job);
-      if (job.jobstatus === "phone interview") interview.push(job);
-      if (job.jobstatus === "final round") offer.push(job);
+      if (job.jobstatus === "recruiter") recruitercall.push(job);
+      if (job.jobstatus === "interview") interview.push(job);
+      if (job.jobstatus === "offer") offer.push(job);
     });
 
     if (this.state.clickedAddButton) {
@@ -81,7 +82,7 @@ class JobsContainer extends React.Component {
           <AddJobForm
             info={this.state.jobData}
             onSubmitJobHandler={this.onSubmitJobHandler}
-            userId={this.props.user.id}
+            userId={this.props.user.userid}
           />
         </div>
       );
@@ -90,42 +91,48 @@ class JobsContainer extends React.Component {
     return (
       <div className="Main_Container">
         <NavBar />
-          <div className="Job_Container">
-            <Jobs className="Wishlist"
-              onCardClickHandler={this.onCardClickHandler}
-              addClickedHandler={this.addClickedHandler}
-              onDeleteCard={this.onDeleteCard}
-              name="Wishlist"
-              jobs={wishlist}
-            />
-            <Jobs className="Applied"
-              onCardClickHandler={this.onCardClickHandler}
-              addClickedHandler={this.addClickedHandler}
-              onDeleteCard={this.onDeleteCard}
-              name="Applied"
-              jobs={applied}
-            />
-            <Jobs className="Recruiter"
-              onCardClickHandler={this.onCardClickHandler}
-              addClickedHandler={this.addClickedHandler}
-              onDeleteCard={this.onDeleteCard}
-              name="Recruiter call"
-              jobs={recruitercall}
-            />
-            <Jobs className="Interview"
-              onCardClickHandler={this.onCardClickHandler}
-              addClickedHandler={this.addClickedHandler}
-              onDeleteCard={this.onDeleteCard}
-              name="Interview"
-              jobs={interview}
-            />
-            <Jobs className="Offer"
-              onCardClickHandler={this.onCardClickHandler}
-              addClickedHandler={this.addClickedHandler}
-              onDeleteCard={this.onDeleteCard}
-              name="Offer"
-              jobs={offer}
-            />
+        <div className="Job_Container">
+          <Jobs
+            className="Wishlist"
+            onCardClickHandler={this.onCardClickHandler}
+            addClickedHandler={this.addClickedHandler}
+            onDeleteCard={this.onDeleteCard}
+            name="Wishlist"
+            jobs={wishlist}
+          />
+          <Jobs
+            className="Applied"
+            onCardClickHandler={this.onCardClickHandler}
+            addClickedHandler={this.addClickedHandler}
+            onDeleteCard={this.onDeleteCard}
+            name="Applied"
+            jobs={applied}
+          />
+          <Jobs
+            className="Recruiter"
+            onCardClickHandler={this.onCardClickHandler}
+            addClickedHandler={this.addClickedHandler}
+            onDeleteCard={this.onDeleteCard}
+            name="Recruiter"
+            jobs={recruitercall}
+          />
+          <Jobs
+            className="Interview"
+            onCardClickHandler={this.onCardClickHandler}
+            addClickedHandler={this.addClickedHandler}
+            onDeleteCard={this.onDeleteCard}
+            name="Interview"
+            jobs={interview}
+          />
+          <Jobs
+            className="Offer"
+            onCardClickHandler={this.onCardClickHandler}
+            addClickedHandler={this.addClickedHandler}
+            onDeleteCard={this.onDeleteCard}
+            name="Offer"
+            jobs={offer}
+          />
+          <SideBar />
         </div>
       </div>
     );

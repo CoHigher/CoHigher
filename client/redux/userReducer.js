@@ -9,9 +9,9 @@ export const logoutUserAction = () => ({ type: LOGOUT_USER });
 export const loginUserThunk = ({ email, password }) => {
   return (dispatch) => {
     axios
-      .post("/login", { email, password })
+      .post("http://localhost:3000/login", { email, password })
       .then((result) => {
-        dispatch(loginUserAction(result));
+        dispatch(loginUserAction(result.data[0]));
       })
       .catch((err) => console.log(err));
   };
@@ -42,11 +42,11 @@ export const createUserThunk = (data) => {
 // };
 
 const initialState = {
-  id: 0,
+  userid: 0,
   fullname: "",
   password: "",
   email: "",
-  cohortId: 0,
+  cohortid: 0,
   logged: false,
 };
 
@@ -55,22 +55,22 @@ export const userReducer = (state = initialState, action) => {
     case LOGIN_USER: {
       return {
         ...state,
-        id: action.data.id,
+        userid: action.data.userid,
         fullname: action.data.fullname,
         password: action.data.password,
         email: action.data.email,
-        cohortId: action.data.cohortId,
+        cohortid: action.data.cohortid,
         logged: true,
       };
     }
     case LOGOUT_USER: {
       return {
         ...state,
-        id: 0,
+        userid: 0,
         fullname: "",
         password: "",
         email: "",
-        cohortId: 0,
+        cohortid: 0,
         logged: false,
       };
     }

@@ -41,7 +41,7 @@ app.post(
 );
 
 //login route
-app.post("/test1", userJobsController.login, (req, res) => {
+app.post("/login", userJobsController.login, (req, res) => {
   res.status(200).cookie("user1", "verified").send(res.locals);
 });
 

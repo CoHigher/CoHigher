@@ -12,18 +12,22 @@ import Signup from "./container/SignUpContainer";
 import "./index.css";
 import JobsContainer from "./container/JobsContainer";
 import AddJobForm from "./components/AddJobForm";
-import { createUserThunk } from "./redux/userReducer";
+import { createUserThunk, loginUserThunk } from "./redux/userReducer";
+
 class App extends React.Component {
   onUserCreation = (userData) => {
-    console.log("Will come in main App ", userData);
     this.props.createUserThunk(userData);
+  };
+
+  onUserLogin = (userData) => {
+    this.props.loginUserThunk(userData);
   };
 
   render() {
     if (!this.props.logged) {
       return (
         <Routes>
-          <Route path="/" element={<JobsContainer />} />
+          <Route path="/" element={<Login onUserLogin={this.onUserLogin} />} />
           <Route
             path="/signup"
             element={<Signup onUserCreation={this.onUserCreation} />}
@@ -35,9 +39,8 @@ class App extends React.Component {
     return (
       <div className="App">
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/SignUp" element={<Signup />} />
-          <Route path="/MyJobs" element={<JobsContainer />} />
+          <Route path="/" element={<JobsContainer />} />
+          <Route path="/MyJobs" element={<MyJobs />} />
           <Route path="/Metrics" element={<Metrics />} />
           <Route path="/CohortView" element={<CohortView />} />
           {/* <Route path="/form" element={<AddJobForm />} /> */}
@@ -51,4 +54,7 @@ const mapStateToProps = (state) => ({
   logged: state.user.logged,
 });
 
-export default connect(mapStateToProps, { createUserThunk })(App);
+export default connect(mapStateToProps, { createUserThunk, loginUserThunk })(
+  App
+);
+

@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import login_image from "../assets/login-image.jpg";
+import signup_image from "../assets/signup-image.jpg";
 import google_icon from "../assets/google-icon.png";
-
-import axios from "axios";
 
 const Signup = (props) => {
   const [fullname, setFullname] = useState("");
@@ -22,10 +20,10 @@ const Signup = (props) => {
           <div className="Info">
             <h1>Sign Up</h1>
             <h5>Tackle the job search together with your friends.</h5>
-            <h4>fullname</h4>
+            <h4>Full Name</h4>
             <input
               className="Sigup_buttons"
-              placeholder="Enter your fullname"
+              placeholder="Enter your full name"
               onChange={(e) => {
                 setFullname(e.target.value);
               }}
@@ -70,9 +68,10 @@ const Signup = (props) => {
             >
               Create account
             </button>
-            <a href="https://github.com/login/oauth/authorize?client_id=72859ee5baefaa57a98c&redirect_uri=http://localhost:3000/github/auth">
-                <button className="Google_Button"><img className="Google_Icon"src={google_icon} /> Sign up with Google</button>
-            </a>
+            <button className="Google_Button">
+              <img className="Google_Icon" src={google_icon} /> Sign up with
+              Google
+            </button>
             <h4 className="Centered_H4">
               Already have an account? <a href="/">Log in</a>
             </h4>
@@ -80,7 +79,7 @@ const Signup = (props) => {
           <section className="Bottom_Title">© Cohigher 2022</section>
         </div>
         <div className="Advert">
-          <img className="Ad_img" src={login_image}></img>
+          <img className="Ad_img" src={signup_image}></img>
         </div>
       </div>
     </div>
